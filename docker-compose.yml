@@ -6,7 +6,6 @@ services:
     build: .
     command: bash -c "python3 manage.py collectstatic --no-input && python3 manage.py migrate && gunicorn --timeout=30 --workers=4 --bind :8000 hello_django.wsgi:application"
     volumes:
-      - .:/code
       - static-volume:/code/collected_static
     expose:
       - "8000"
@@ -17,7 +16,7 @@ services:
       - db_network
   db:
     restart: always
-    image: mysql:latest
+    image: mysql:5.7.31
     volumes:
       - "./mysql:/var/lib/mysql"
     ports:
@@ -29,7 +28,7 @@ services:
       - db_network
   nginx:
     restart: always
-    image: nginx:latest
+    image: nginx:1.19.0
     ports:
       - "8000:8000"
     volumes:
@@ -39,7 +38,7 @@ services:
       - app
     networks:
       - web_network
-
+      
 networks:
   web_network:
     driver: bridge

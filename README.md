@@ -1,3 +1,3 @@
 # hello django
 
-A Django project configured with docker
+A django project configured with docker

@@ -25,8 +25,11 @@ SECRET_KEY = 'n-ch^b=m!w5^8x%(yg)0elx_rx+l1nw$0gjaph5!tsfvgnj!_('
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
+# collectstatic
+STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static/')
+STATIC_URL = '/static/'
 
 # Application definition
 
@@ -78,6 +81,15 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'hello_django',
+    #     'USER': 'root',
+    #     'PASSWORD': '123',
+    #     'HOST': 'db',
+    #     'PORT': '3306',
+    #     'OPTIONS': {'charset': 'utf8mb4'},
+    # }
 }
 
 # Password validation

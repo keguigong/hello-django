@@ -10,7 +10,6 @@ if [[ $# -ne 2 ]] ; then
   exit 1
 fi
 
-cd $SCRIPTPATH
-cd ../
-docker build -t keguigong/$1/hello-django:$2 .
-docker push keguigong/perd/$1/hello-django:$2
+docker rmi $(docker images -a -f 'dangling=true' -q)
+docker build -t keguigong/hello-django:$2 -f build/Dockerfile --no-cache .
+docker push keguigong/hello-django:$2

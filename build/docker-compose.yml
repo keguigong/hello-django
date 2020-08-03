@@ -6,7 +6,7 @@ services:
     build: .
     command: bash -c "python3 manage.py collectstatic --no-input && python3 manage.py migrate && gunicorn --timeout=30 --workers=4 --bind :8000 hello_django.wsgi:application"
     volumes:
-      - static-volume:/code/collected_static
+      - static-volume:/app/static
     expose:
       - "8000"
     networks:
@@ -17,7 +17,7 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - static-volume:/code/collected_static
+      - static-volume:/app/static
       - ./config/nginx:/etc/nginx/conf.d
     depends_on:
       - app
